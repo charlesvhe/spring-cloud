@@ -11,6 +11,7 @@
         <module>provider</module>
         <module>consumer</module>
         <module>hystrix</module>
+        <module>oauth</module>
     </modules>
     <packaging>pom</packaging>
 
