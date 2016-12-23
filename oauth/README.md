@@ -41,3 +41,13 @@ scope all
 ###验证token
 http://localhost:8000/oauth/check_token?token=e101ad2d-ae2b-438b-ba8c-c27be5e72722
 期间会提示登录 用户名 7887e57b-6619-42a3-8fb4-047f6ed6ef0b 密码 a770ba84-5d4e-46f8-aca9-2b40fff2312e
+
+
+###password方式直接获取token
+POST方式访问http://localhost:8000/oauth/token
+期间会提示登录 用户名 7887e57b-6619-42a3-8fb4-047f6ed6ef0b 密码 a770ba84-5d4e-46f8-aca9-2b40fff2312e
+POST form表单方式提交
+grant_type password
+username user
+password user
+scope all
