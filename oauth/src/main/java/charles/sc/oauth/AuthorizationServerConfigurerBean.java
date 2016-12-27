@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.ClientRegistrationException;
 import org.springframework.security.oauth2.provider.client.BaseClientDetails;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,9 +28,13 @@ public class AuthorizationServerConfigurerBean implements AuthorizationServerCon
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private JwtAccessTokenConverter jwtAccessTokenConverter;
+
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.checkTokenAccess("permitAll()");
+        security.tokenKeyAccess("isAuthenticated()");
+        security.checkTokenAccess("isAuthenticated()");
     }
 
     @Override
@@ -57,6 +62,6 @@ public class AuthorizationServerConfigurerBean implements AuthorizationServerCon
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints)
             throws Exception {
-        endpoints.authenticationManager(this.authenticationManager);
+        endpoints.authenticationManager(this.authenticationManager).accessTokenConverter(jwtAccessTokenConverter);
     }
 }
