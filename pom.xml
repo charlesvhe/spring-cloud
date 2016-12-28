@@ -12,6 +12,7 @@
         <module>consumer</module>
         <module>hystrix</module>
         <module>oauth</module>
+        <module>zuul</module>
     </modules>
     <packaging>pom</packaging>
 
