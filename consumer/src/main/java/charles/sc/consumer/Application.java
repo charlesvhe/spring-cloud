@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
-@EnableCircuitBreaker
+//@EnableCircuitBreaker
 public class Application {
     @Bean
     public WebMvcConfigurer corsConfigurer() {  // 允许跨域

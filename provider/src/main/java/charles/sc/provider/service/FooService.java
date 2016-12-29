@@ -1,6 +1,5 @@
 package charles.sc.provider.service;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,18 +22,24 @@ public class FooService {
     @Value("${foo:foo}")
     private String foo;
 
-    @HystrixCommand(fallbackMethod = "fallbackBar")
     @RequestMapping(method = RequestMethod.GET)
     public String bar() {
         log.info("FooService.bar");
-//        if(System.currentTimeMillis() % 2 == 0){
-//            throw new RuntimeException();
+//        if (System.currentTimeMillis() % 2 == 0) {
+//            throw new RuntimeException("provider exception");
 //        }
-        return "bar " + foo +System.currentTimeMillis();
+        return "bar " + foo + System.currentTimeMillis();
     }
 
-    public String fallbackBar() {
-        log.info("FooService.fallbackBar");
-        return "fallbackBar" + foo +System.currentTimeMillis();
+    @RequestMapping(value = "/pt", method = RequestMethod.GET)
+    public String ptbar() {
+        log.info("FooService.ptbar");
+        return "ptbar " + System.currentTimeMillis();
+    }
+
+    @RequestMapping(value = "/pb", method = RequestMethod.GET)
+    public String pbbar() {
+        log.info("FooService.pbbar");
+        return "pbbar " + System.currentTimeMillis();
     }
 }

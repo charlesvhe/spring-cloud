@@ -26,6 +26,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.security.KeyPair;
+import java.security.Principal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -48,6 +49,11 @@ public class Application {
         return "Hello World ptresource! " + System.currentTimeMillis();
     }
 
+    @RequestMapping("/user")
+    public Principal user(Principal user) {
+        return user;
+    }
+
     @Bean
     public UserDetailsService userDetailsService(@Autowired final JdbcTemplate jdbcTemplate) {
         return new UserDetailsService() {
@@ -65,15 +71,15 @@ public class Application {
         };
     }
 
-    @Bean
-    public JwtAccessTokenConverter jwtAccessTokenConverter() {
-        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        KeyPair keyPair = new KeyStoreKeyFactory(
-                new ClassPathResource("jwt_123456.jks"), "123456".toCharArray())
-                .getKeyPair("jwt");
-        converter.setKeyPair(keyPair);
-        return converter;
-    }
+//    @Bean
+//    public JwtAccessTokenConverter jwtAccessTokenConverter() {
+//        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+//        KeyPair keyPair = new KeyStoreKeyFactory(
+//                new ClassPathResource("jwt_123456.jks"), "123456".toCharArray())
+//                .getKeyPair("jwt");
+//        converter.setKeyPair(keyPair);
+//        return converter;
+//    }
 
     @Bean
     public AuthorizationServerConfigurer authorizationServerConfigurer() {

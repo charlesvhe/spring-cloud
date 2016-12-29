@@ -28,8 +28,8 @@ public class AuthorizationServerConfigurerBean implements AuthorizationServerCon
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtAccessTokenConverter jwtAccessTokenConverter;
+//    @Autowired
+//    private JwtAccessTokenConverter jwtAccessTokenConverter;
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -62,6 +62,6 @@ public class AuthorizationServerConfigurerBean implements AuthorizationServerCon
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints)
             throws Exception {
-        endpoints.authenticationManager(this.authenticationManager).accessTokenConverter(jwtAccessTokenConverter);
+        endpoints.authenticationManager(this.authenticationManager);//.accessTokenConverter(jwtAccessTokenConverter);
     }
 }
