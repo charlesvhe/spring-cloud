@@ -20,3 +20,27 @@ docker swarm overlay 网络
         -bootstrap-expect 1 \
         -retry-join 172.20.0.3
 
+###使用http2
+@Bean
+    public EmbeddedServletContainerCustomizer tomcatCustomizer() {
+        return new EmbeddedServletContainerCustomizer() {
+
+            @Override
+            public void customize(ConfigurableEmbeddedServletContainer container) {
+                if (container instanceof TomcatEmbeddedServletContainerFactory) {
+                    ((TomcatEmbeddedServletContainerFactory) container)
+                            .addConnectorCustomizers(new TomcatConnectorCustomizer() {
+                                @Override
+                                public void customize(Connector connector) {
+                                    connector.addUpgradeProtocol(new Http2Protocol());
+                                }
+
+                            });
+                }
+            }
+
+        };
+    }
+
+验证：curl --http2 -i http://localhost:8100/foo
+
