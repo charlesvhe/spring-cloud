@@ -10,7 +10,7 @@
     <modules>
         <module>provider</module>
         <module>consumer</module>
-        <module>hystrix</module>
+        <module>turbine</module>
         <module>oauth</module>
         <module>zuul</module>
     </modules>
